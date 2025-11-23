@@ -50,7 +50,7 @@ def pow5(x):
 # Load image
 input_image, width, height = read_ppm('fisheye.ppm')
 
-# Output size (zoom out)
+# Zoom Out
 zoom_out_factor = 1.0
 output_width = int(width * zoom_out_factor)
 output_height = int(height * zoom_out_factor)
@@ -61,11 +61,12 @@ cy_in = height / 2.0
 cx_out = output_width / 2.0
 cy_out = output_height / 2.0
 
-fx = fy = 0.8 * width  # heuristic zoom
+# Change factors if need be
+fx = fy = 0.8 * width
 k1 = -0.56
 k2 = 0.04
 
-# Prepare output image
+# Output image
 output_image = [[[0, 0, 0] for _ in range(output_width)] for _ in range(output_height)]
 
 # Dewarp
@@ -93,6 +94,6 @@ for y_out in range(output_height):
         else:
             output_image[y_out][x_out] = [0, 0, 0]
 
-# Save result
+# Save image
 write_ppm('undistorted.ppm', output_image, output_width, output_height)
 
